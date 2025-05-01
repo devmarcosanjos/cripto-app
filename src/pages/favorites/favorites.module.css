@@ -1,0 +1,165 @@
+.container {
+  padding: 0 14px;
+  margin-bottom: 56px;
+}
+
+.container h1 {
+  margin: 24px 0;
+  color: #FFF;
+  text-align: center;
+}
+
+.container p {
+  color: #FFF;
+  text-align: center;
+  margin: 24px 0;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 14px;
+  margin: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tr {
+  background-color: #1d1c20;
+}
+
+td:first-child,
+th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+td:last-child,
+th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+table th, 
+table td {
+  padding: 14px;
+  text-align: center;
+  color: #FFF;
+}
+
+.tdLabel {
+  font-weight: bold;
+  color: #FFF;
+  font-size: 18px;
+}
+
+.img {
+  width: 20px;
+  height: 20px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(199, 183, 38);
+}
+
+.link:hover {
+  color: rgb(239, 225, 98);
+}
+
+.buttonRemove {
+  background: transparent;
+  border: none;
+  color: #FF0000;
+  transition: transform 0.3s;
+}
+
+.buttonRemove:hover {
+  transform: scale(1.1);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #FFF;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 24px 0;
+}
+
+.backButton:hover {
+  color: rgb(199, 183, 38);
+  background-color: rgba(199, 183, 38, 0.1);
+}
+
+@media screen and (max-width: 600px){
+  .name { 
+    margin-left: 14px
+  }
+
+  table {
+    border: 0;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .tr {
+    border-bottom: 1px solid #DDD;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  table td {
+    border-bottom: 1px solid rgba(211, 211, 211, 0.1);
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 12px;
+    min-width: 120px;
+    margin-right: 8px;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  td:first-child,
+  th:first-child {
+    border-radius: 0;
+  }
+
+  td:last-child,
+  th:last-child {
+    border-radius: 0;
+  }
+}

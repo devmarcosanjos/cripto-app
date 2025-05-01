@@ -3,23 +3,70 @@
   margin-bottom: 56px
 }
 
+/* Form styles */
 .form {
   width: 100%;
   display: flex;
-  gap: 24px;
+  gap: 12px;
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 14px;
 }
 
-.form input {
+.inputWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.inputWrapper svg {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.inputWrapper input {
   width: 100%;
-  height: 44px;
-  border: 0;
-  padding: 0 8px;
-  border-radius: 4px;
+  height: 48px;
+  border: 2px solid transparent;
+  background-color: #1d1c20;
+  padding: 0 16px 0 48px;
+  border-radius: 8px;
   outline: none;
+  color: #FFF;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.inputWrapper input::placeholder {
+  color: #666;
+}
+
+.inputWrapper input:focus {
+  border-color: rgb(199, 183, 38);
+  box-shadow: 0 0 0 1px rgba(199, 183, 38, 0.1);
 }
 
 .form button {
-  background-color: transparent;
+  background-color: rgb(199, 183, 38);
+  border: none;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  color: #FFF;
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.form button:hover {
+  background-color: rgb(239, 225, 98);
+  transform: scale(1.02);
 }
 
 table {
@@ -72,8 +119,6 @@ table td {
 .tdLoss {
   color: #FF0000;
 }
-
-
 
 .img {
   width: 20px;
@@ -140,6 +185,16 @@ table td {
   color: rgb(239, 225, 98);
 }
 
+.favoriteButton {
+  background: transparent;
+  border: none;
+  transition: transform 0.3s;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.2);
+}
+
 /* RESPOSIVIDADE TABLE */
 
 @media screen and (max-width: 600px){
@@ -201,5 +256,14 @@ table td {
    td:last-child,
   th:last-child {
     border-radius: 0 0px 0px 0;
+  }
+
+  .form {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form button {
+    width: 100%;
   }
 }

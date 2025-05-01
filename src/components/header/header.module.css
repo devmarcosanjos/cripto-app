@@ -1,16 +1,53 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 120px;
-  max-width: 1080px;
-  margin: 20px 0 50px 0;
+  justify-content: space-between;
+  height: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .hero {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 140px; 
-  width: 100%; /* Added width to ensure the hero section scales properly */
+}
+
+.hero img {
+  max-width: 200px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.hero img:hover {
+  transform: scale(1.02);
+}
+
+.favoritesLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgb(199, 183, 38);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.favoritesLink:hover {
+  color: rgb(239, 225, 98);
+  border-color: rgba(199, 183, 38, 0.2);
+  background-color: rgba(199, 183, 38, 0.1);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero img {
+    max-width: 150px;
+  }
 }

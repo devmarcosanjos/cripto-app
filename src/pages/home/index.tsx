@@ -1,4 +1,4 @@
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsStar, BsStarFill } from "react-icons/bs";
 import styles from "./index.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
@@ -32,8 +32,34 @@ export function Home() {
   const [input, setInput] = useState("");
   const [coins, setCoins] = useState<CoinProps[]>([]);
   const [filteredCoins, setFilteredCoins] = useState<CoinProps[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
   const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const myList = localStorage.getItem("@bluestash");
+    if (myList) {
+      const favoritesIds = JSON.parse(myList).map((coin: CoinProps) => coin.id);
+      setFavorites(favoritesIds);
+    }
+  }, []);
+
+  function handleSaveCoin(coin: CoinProps) {
+    const myList = localStorage.getItem("@bluestash");
+    const coinsSaved: CoinProps[] = myList ? JSON.parse(myList) : [];
+
+    const hasCoin = coinsSaved.some((item) => item.id === coin.id);
+
+    if (hasCoin) {
+      const filteredCoins = coinsSaved.filter((item) => item.id !== coin.id);
+      localStorage.setItem("@bluestash", JSON.stringify(filteredCoins));
+      setFavorites(favorites.filter(id => id !== coin.id));
+    } else {
+      coinsSaved.push(coin);
+      localStorage.setItem("@bluestash", JSON.stringify(coinsSaved));
+      setFavorites([...favorites, coin.id]);
+    }
+  }
 
   // Função para filtrar as moedas
   const handleSearch = (value: string) => {
@@ -113,14 +139,17 @@ export function Home() {
   <>
     <main className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Digite o nome da moeda..." 
-          value={input}
-          onChange={(e) => handleSearch(e.target.value)}
-        />
+        <div className={styles.inputWrapper}>
+          <BsSearch size={20} color="#666" />
+          <input 
+            type="text" 
+            placeholder="Digite o símbolo ou nome da moeda..." 
+            value={input}
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+        </div>
         <button type="submit">
-          <BsSearch size={30} color="#FFF" />
+          Buscar
         </button>
       </form>
 
@@ -133,6 +162,7 @@ export function Home() {
             <th className="col">Preço</th>
             <th className="col">Volume</th>
             <th className="col">Mudança 24h</th>
+            <th className="col">Favoritar</th>
           </tr>
         </thead>
 
@@ -165,10 +195,23 @@ export function Home() {
             <td className={Number(coin.changePercent24Hr) > 0 ? styles.tdProfit : styles.tdLoss} data-label="Mudança 24h">
               <span>{Number(coin.changePercent24Hr).toFixed(2)}%</span>
             </td>
+
+            <td className={styles.tdLabel} data-label="Favoritar">
+              <button 
+                className={styles.favoriteButton}
+                onClick={() => handleSaveCoin(coin)}
+              >
+                {favorites.includes(coin.id) ? (
+                  <BsStarFill size={24} color="#FFD700" />
+                ) : (
+                  <BsStar size={24} color="#FFF" />
+                )}
+              </button>
+            </td>
           </tr>
           )) : (
             <tr>
-              <td colSpan={5} style={{textAlign: 'center', padding: '20px', color: '#FFF'}}>
+              <td colSpan={6} style={{textAlign: 'center', padding: '20px', color: '#FFF'}}>
                 Nenhuma moeda encontrada
               </td>
             </tr>
