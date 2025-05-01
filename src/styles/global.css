@@ -1,0 +1,11 @@
+a {
+  color: rgb(199, 183, 38);
+}
+
+a:hover {
+  color: rgb(239, 225, 98);
+}
+
+::selection {
+  background: rgba(199, 183, 38, 0.2);
+}
