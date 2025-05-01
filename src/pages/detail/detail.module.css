@@ -5,6 +5,13 @@
   color: #FFF;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0;
+}
+
 .center {
   text-align: center;
   margin: 24px 0;
@@ -71,6 +78,22 @@
 .backButton:hover {
   color: rgb(199, 183, 38);
   background-color: rgba(199, 183, 38, 0.1);
+}
+
+.favoriteButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteButton:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  transform: scale(1.1);
 }
 
 .hr {

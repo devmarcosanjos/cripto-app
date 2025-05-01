@@ -1,5 +1,5 @@
 .container {
-  padding: 0 14px;
+  padding: 0 24px;
   margin-bottom: 56px;
 }
 
@@ -7,12 +7,148 @@
   margin: 24px 0;
   color: #FFF;
   text-align: center;
+  font-size: 2rem;
+}
+
+.container h2 {
+  color: #FFF;
+  margin: 32px 0 24px;
+  font-size: 1.5rem;
 }
 
 .container p {
   color: #FFF;
   text-align: center;
   margin: 24px 0;
+}
+
+/* Dashboard Styles */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 32px 0;
+}
+
+.dashboardSection {
+  width: 100%;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: #1d1c20;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.gainCard:hover {
+  border-color: rgba(0, 255, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.lossCard:hover {
+  border-color: rgba(255, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cardImg {
+  width: 32px;
+  height: 32px;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.cardLink h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.symbol {
+  color: #666;
+  margin: 4px 0;
+}
+
+.cardInfo {
+  margin: 16px 0;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #FFF;
+  margin: 8px 0;
+}
+
+.change {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.change.positive {
+  color: #00FF00;
+}
+
+.change.negative {
+  color: #FF0000;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 1px solid #FF0000;
+  color: #FF0000;
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: 100%;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Back Button */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #FFF;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 24px 0;
+}
+
+.backButton:hover {
+  color: rgb(199, 183, 38);
+  background-color: rgba(199, 183, 38, 0.1);
+}
+
+/* Table Section */
+.tableSection {
+  margin-top: 48px;
 }
 
 table {
@@ -82,25 +218,6 @@ table td {
   transform: scale(1.1);
 }
 
-.backButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: transparent;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: #FFF;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin: 24px 0;
-}
-
-.backButton:hover {
-  color: rgb(199, 183, 38);
-  background-color: rgba(199, 183, 38, 0.1);
-}
-
 @media screen and (max-width: 600px){
   .name { 
     margin-left: 14px
@@ -161,5 +278,27 @@ table td {
   td:last-child,
   th:last-child {
     border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .container h2 {
+    font-size: 1.25rem;
   }
 }

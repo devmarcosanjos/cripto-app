@@ -1,7 +1,7 @@
 import { BsSearch, BsStar, BsStarFill } from "react-icons/bs";
 import styles from "./index.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useCallback, useMemo } from "react";
 
 export interface CoinProps {
   id: string;
@@ -35,6 +35,38 @@ export function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
+
+  const price = useMemo(() => Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }), []);
+
+  const priceShort = useMemo(() => Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+  }), []);
+
+  const getData = useCallback(async () => {
+    const response = await fetch(`${API_BASE_URL}/assets?limit=10&offset=${offset}&apiKey=${API_KEY}`);
+    const data: DataProp = await response.json();
+    const coinsData = data.data;
+
+    const formatDataResult = coinsData.map((item) => {
+      return {
+        ...item,
+        formatPrice: price.format(Number(item.priceUsd)),
+        formatMarketCap: priceShort.format(Number(item.marketCapUsd)),
+        formatVolume: priceShort.format(Number(item.volumeUsd24Hr)),
+      };
+    });
+
+    setCoins(prevCoins => [...prevCoins, ...formatDataResult]);
+  }, [offset, price, priceShort]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   useEffect(() => {
     const myList = localStorage.getItem("@bluestash");
@@ -96,44 +128,8 @@ export function Home() {
   }
 
   useEffect(() => {
-    getData()
-  }, [offset])
-
-  useEffect(() => {
     setFilteredCoins(coins);
   }, [coins]);
-
-  const price = Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  })
-
-    const priceShort = Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    notation: "compact",
-  })
-
-  async function getData(){
-    fetch(`${API_BASE_URL}/assets?limit=10&offset=${offset}&apiKey=${API_KEY}`)
-    .then((response) => response.json())
-    .then((data: DataProp) => {
-      const coinsData = data.data
-
-      const formatDataResult = coinsData.map((item) => {
-        const formated = {
-          ...item,
-          formatPrice: price.format(Number(item.priceUsd)),
-          formatMarketCap: priceShort.format(Number(item.marketCapUsd)),
-          formatVolume: priceShort.format(Number(item.volumeUsd24Hr)),
-        }
-        return formated;
-      })
-      const listConis = [...coins, ...formatDataResult]
-
-       setCoins(listConis)})
-  }
-
 
   return (
   <>
